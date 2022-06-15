@@ -1,6 +1,7 @@
 import { View, FlatList } from 'react-native'
 import React from 'react'
 import Story from "../Story"
+import { StyleSheet } from 'react-native'
 
 const data =[
     {
@@ -26,6 +27,7 @@ const UserStoriesPreview = () => {
   return (
     <FlatList 
       data={data}
+      style={styles.container}
       keyExtractor={({name}) =>name}
       renderItem={({item}) => <Story imageUrl={item.imageUrl} name={item.name} />}
       horizontal
@@ -34,4 +36,9 @@ const UserStoriesPreview = () => {
   )
 }
 
+const styles = StyleSheet.create({
+  container:{
+    marginBottom:15
+  }
+})
 export default UserStoriesPreview
