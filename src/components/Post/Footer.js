@@ -1,6 +1,7 @@
 import { View, Text } from 'react-native'
 import React from 'react'
 import { StyleSheet } from 'react-native'
+import { Icon } from 'react-native-vector-icons/icon'
 
 const Footer = ({postedAt, caption, likesCount}) => {
   return (
@@ -8,6 +9,7 @@ const Footer = ({postedAt, caption, likesCount}) => {
       <Text style={styles.likes}>{likesCount} Likes</Text>
       <Text style={styles.caption}>{caption}</Text>
       <Text style={styles.postedAt}>{postedAt}</Text>
+      {/*<Icon name="rocket" size={30} color="#900"/> */}
     </View>
   )
 }
