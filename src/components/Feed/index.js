@@ -1,10 +1,11 @@
 import { View, Text, FlatList } from 'react-native'
 import React from 'react'
 import Post from "../Post"
-import UserStoryPreview from "../UserStoriesPreview"
+import UsersStoryPreview from "../UsersStoriesPreview"
 
 const data =[
     {
+        id:"1",
         user:{
           image:"https://i.ibb.co/MyddYHc/Watch.jpg",
           username:"George Kibe Senior"
@@ -15,6 +16,7 @@ const data =[
         postedAt: "6 minutes ago"
     },
     {
+        id:"2",
         user:{
           image:"https://i.ibb.co/MyddYHc/Watch.jpg",
           username:"George Kibe Junior"
@@ -25,6 +27,7 @@ const data =[
         postedAt: "6 minutes ago"
     },
     {
+        id:"3",
         user:{
           image:"https://i.ibb.co/p0c4YbL/placeholder3.jpg",
           username:"George Kibe Senior"
@@ -40,8 +43,9 @@ const Feed = () => {
   return (
     <FlatList 
         data={data}
-        ListHeaderComponent={UserStoryPreview}
+        ListHeaderComponent={UsersStoryPreview}
         renderItem={({item}) => <Post post={item} />}
+        keyExtractor={({id}) => id}
     />
   )
 }

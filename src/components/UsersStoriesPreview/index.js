@@ -23,7 +23,7 @@ const data =[
 
 ]
 
-const UserStoriesPreview = () => {
+const UsersStoriesPreview = () => {
   return (
     <FlatList 
       data={data}
@@ -41,4 +41,4 @@ const styles = StyleSheet.create({
     marginBottom:15
   }
 })
-export default UserStoriesPreview
+export default UsersStoriesPreview
