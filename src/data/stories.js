@@ -15,7 +15,19 @@ export default [
           postedTime:"1 hour ago"
         },
         {
-          imageUrl:"https://i.ibb.co/MyddYHc/Watch.jpg",
+          imageUrl:"https://i.ibb.co/TcH0xGX/wine.jpg",
+          postedTime:"25 minutes ago"
+        },
+        {
+          imageUrl:"https://i.ibb.co/jkjkVYt/Samsung-Galaxy-Phone.jpg",
+          postedTime:"25 minutes ago"
+        },
+        {
+          imageUrl:"https://i.ibb.co/Gx763XY/placeholder1.jpg",
+          postedTime:"25 minutes ago"
+        },
+        {
+          imageUrl:"https://i.ibb.co/gjqfVBK/headphones.jpg",
           postedTime:"25 minutes ago"
         },
 
