@@ -1,11 +1,12 @@
-import { View, Text } from 'react-native'
+import { SafeAreaView, Text } from 'react-native'
 import React from 'react'
 
 const StoryScreen = () => {
   return (
-    <View>
+    <SafeAreaView>
       <Text>StoryScreen</Text>
-    </View>
+      <Text>Awesome story</Text>
+    </SafeAreaView>
   )
 }
 

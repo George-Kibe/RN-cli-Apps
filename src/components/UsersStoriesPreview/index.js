@@ -1,35 +1,16 @@
 import { View, FlatList } from 'react-native'
 import React from 'react'
-import Story from "../Story"
+import UserStoryPreview from '../UserStoryPreview'
 import { StyleSheet } from 'react-native'
-
-const data =[
-    {
-      imageUrl:"https://i.ibb.co/MyddYHc/Watch.jpg",
-      name:"Alex Johnson",
-    },
-    {
-      imageUrl:"https://i.ibb.co/p0c4YbL/placeholder3.jpg",
-      name:"George Strait",
-    },
-    {
-      imageUrl:"https://i.ibb.co/GQyvhfM/realestate19.jpg",
-      name:"James Jackson",
-    },
-    {
-      imageUrl:"https://i.ibb.co/TYTgYjc/realestate6.jpg",
-      name:"John FitzGerald",
-    },
-
-]
+import stories from "../../data/stories"
 
 const UsersStoriesPreview = () => {
   return (
     <FlatList 
-      data={data}
+      data={stories}
       style={styles.container}
-      keyExtractor={({name}) =>name}
-      renderItem={({item}) => <Story imageUrl={item.imageUrl} name={item.name} />}
+      keyExtractor={({user:{id}}) => id}
+      renderItem={({item}) => <UserStoryPreview story={item} />}
       horizontal
       showsHorizontalScrollIndicator={false}
     />
