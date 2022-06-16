@@ -1,0 +1,27 @@
+type User @model {
+  id: ID!
+  name: String!
+  image: String!
+  posts: [Post] @hasMany
+  story: [Story] @hasMany
+}
+
+type Post @model {
+  id: ID!
+  caption: String!
+  image: String!
+  likes: Int!
+  user: User @belongsTo
+}
+type Story @model {
+  id: ID!
+  image: String!
+  user: User @belongsTo
+}
+
+#comments: [Comment] @hasMany
+#type Comment @model {
+#id: ID!
+#post: Post @belongsTo
+# content: String!
+#}
