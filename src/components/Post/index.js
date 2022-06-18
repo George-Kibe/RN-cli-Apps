@@ -5,12 +5,13 @@ import Body from './Body'
 import Footer from './Footer'
 
 const Post = ({post}) => {
-  const {user, postedAt, caption, likesCount} = post
+  const {user, createdAt, caption, likes} = post
+  console.warn(user)
   return (
     <View>
-      <Header imageUrl={user.image} name={user.username}/>
-      <Body imageUrl={post.imageUrl}/>
-      <Footer caption={caption} likesCount={likesCount} postedAt={postedAt}/>
+      <Header image={user.image} name={user.name}/>
+      <Body image={post.image}/>
+      <Footer caption={caption} likes={likes} createdAt={createdAt}/>
     </View>
   )
 }

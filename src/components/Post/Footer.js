@@ -6,7 +6,7 @@ import FontistoIcon from "react-native-vector-icons/Fontisto"
 import IonIcon from "react-native-vector-icons/Ionicons"
 import FontAwesome from "react-native-vector-icons/FontAwesome"
 
-const Footer = ({postedAt, caption, likesCount:likesCountProp}) => {
+const Footer = ({createdAt, caption, likes:likesCountProp}) => {
   const [isLiked, setIsLiked] = useState(false)
   const [likesCount, setlikesCount] = useState(0)
   const likePressed = () =>{
@@ -36,7 +36,7 @@ const Footer = ({postedAt, caption, likesCount:likesCountProp}) => {
       </View>
       <Text style={styles.likes}>{likesCount} Likes</Text>
       <Text style={styles.caption}>{caption}</Text>
-      <Text style={styles.postedAt}>{postedAt}</Text>
+      <Text style={styles.createdAt}>{createdAt}</Text>
     </View>
   )
 }
@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
   caption:{
     margin:3,
   },
-  postedAt:{
+  createdAt:{
     color:"#bcbcbc",
     margin:3,
   }

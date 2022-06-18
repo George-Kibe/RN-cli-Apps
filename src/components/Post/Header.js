@@ -4,11 +4,11 @@ import ProfilePicture from '../ProfilePicture'
 import { StyleSheet } from 'react-native'
 import Icon from "react-native-vector-icons/Entypo"
 
-const Header = ({imageUrl, name}) => {
+const Header = ({image, name}) => {
   return (
     <View style={styles.container}>
       <View style={styles.left}>
-        <ProfilePicture uri={imageUrl} size={40}/>
+        <ProfilePicture uri={image} size={40}/>
         <Text style={styles.name}>{name}</Text>
       </View>
       <View style={styles.right}>

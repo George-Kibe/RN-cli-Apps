@@ -1,46 +1,10 @@
 import { View, Text, FlatList } from 'react-native'
 import React, {useState, useEffect} from 'react'
-import {API, graphqlOperation} from "aws-amplify"
+import {API, graphqlOperation, DataStore} from "aws-amplify"
 import Post from "../Post"
 import UsersStoryPreview from "../UsersStoriesPreview"
+import {listPosts} from "../../graphql/queries"
 
-import {listPosts, listUsers} from "../../graphql/queries"
-const data =[
-    {
-        id:"1",
-        user:{
-          image:"https://i.ibb.co/MyddYHc/Watch.jpg",
-          username:"George Kibe Senior"
-        },
-        imageUrl:"https://i.ibb.co/GQyvhfM/realestate19.jpg",
-        caption:"Beautiful city Netgram",
-        likesCount: 5689,
-        postedAt: "6 minutes ago"
-    },
-    {
-        id:"2",
-        user:{
-          image:"https://i.ibb.co/MyddYHc/Watch.jpg",
-          username:"George Kibe Junior"
-        },
-        imageUrl:"https://i.ibb.co/p0c4YbL/placeholder3.jpg",
-        caption:"Beautiful city Netgram",
-        likesCount: 5689,
-        postedAt: "6 minutes ago"
-    },
-    {
-        id:"3",
-        user:{
-          image:"https://i.ibb.co/p0c4YbL/placeholder3.jpg",
-          username:"George Kibe Senior"
-        },
-        imageUrl:"https://i.ibb.co/GQyvhfM/realestate19.jpg",
-        caption:"Beautiful city Netgram",
-        likesCount: 5689,
-        postedAt: "6 minutes ago"
-    },
-
-]
 const Feed = () => {
   const [posts, setPosts] = useState([])
   useEffect(() =>{
@@ -49,17 +13,17 @@ const Feed = () => {
 
   const fetchPosts = async () =>{
     try{
-      const postData = await API.graphql(graphqlOperation(listUsers));
-      setPosts(postData)
-      console.warn(postData)
+      const postData = await API.graphql(graphqlOperation(listPosts));
+      setPosts(postData.data.listPosts.items)
+      warn(postData.data.listPosts.items)
     }catch (error){
       console.log(error.message)
     }
   }
-  console.log("Posts:", posts)
+  //console.log("Posts:", posts)
   return (
     <FlatList 
-        data={data}
+        data={posts}
         ListHeaderComponent={UsersStoryPreview}
         renderItem={({item}) => <Post post={item} />}
         keyExtractor={({id}) => id}

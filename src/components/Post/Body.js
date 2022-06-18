@@ -2,9 +2,9 @@ import { View, Image } from 'react-native'
 import React from 'react'
 import { StyleSheet , Dimensions} from 'react-native'
 
-const Body = ({imageUrl}) => {
+const Body = ({image}) => {
   return (
-    <Image source={{uri: imageUrl}} style={styles.image}/>
+    <Image source={{uri: image}} style={styles.image}/>
   )
 }
 
