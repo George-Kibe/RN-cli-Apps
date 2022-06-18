@@ -1,8 +1,10 @@
 import { View, Text, FlatList } from 'react-native'
-import React from 'react'
+import React, {useState, useEffect} from 'react'
+import {API, graphqlOperation} from "aws-amplify"
 import Post from "../Post"
 import UsersStoryPreview from "../UsersStoriesPreview"
 
+import {listPosts, listUsers} from "../../graphql/queries"
 const data =[
     {
         id:"1",
@@ -40,6 +42,21 @@ const data =[
 
 ]
 const Feed = () => {
+  const [posts, setPosts] = useState([])
+  useEffect(() =>{
+    fetchPosts();
+  },[])
+
+  const fetchPosts = async () =>{
+    try{
+      const postData = await API.graphql(graphqlOperation(listUsers));
+      setPosts(postData)
+      console.warn(postData)
+    }catch (error){
+      console.log(error.message)
+    }
+  }
+  console.log("Posts:", posts)
   return (
     <FlatList 
         data={data}
