@@ -6,7 +6,6 @@ import Footer from './Footer'
 
 const Post = ({post}) => {
   const {user, createdAt, caption, likes} = post
-  console.warn(user)
   return (
     <View>
       <Header image={user.image} name={user.name}/>

@@ -15,7 +15,7 @@ const Feed = () => {
     try{
       const postData = await API.graphql(graphqlOperation(listPosts));
       setPosts(postData.data.listPosts.items)
-      warn(postData.data.listPosts.items)
+      //warn(postData.data.listPosts.items)
     }catch (error){
       console.log(error.message)
     }
