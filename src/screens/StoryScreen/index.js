@@ -1,39 +1,57 @@
 import { Text, View, SafeAreaView, ActivityIndicator, ImageBackground, TouchableWithoutFeedback,Dimensions, Alert, TextInput} from 'react-native'
 import React, {useState, useEffect} from 'react'
 import { useRoute, useNavigation } from '@react-navigation/native'
-import stories from "../../data/stories"
+//import stories from "../../data/stories"
 import ProfilePicture from "../../components/ProfilePicture"
 import Feather from "react-native-vector-icons/Feather"
 import IonIcons from "react-native-vector-icons/Ionicons"
+import { API, graphqlOperation } from 'aws-amplify'
+import {listStories} from "../../graphql/queries"
+
 import styles from "./styles"
 
 const StoryScreen = () => {
   const [userStory, setUserStory] = useState(null)
   const [activeStoryIndex, setActiveStoryIndex] = useState(0)
   const [activeStory, setActiveStory] = useState(null)
+  const [stories, setStories] = useState([])
 
   const navigation = useNavigation()
   const route = useRoute()
   const userId = route.params.userId
 
   useEffect(() => {
-    const userStory = stories.find(stories => stories.user.id === userId)
-    setUserStory(userStory)
+    fetchStories()
+    //const userStory = stories.find(stories => stories.user.id === userId)
     setActiveStoryIndex(0)
   }, [])
+
+  const fetchStories = async () =>{
+    try{
+      const storiesData = await API.graphql(graphqlOperation(listStories))
+      console.log("Stories Data:",storiesData.data.listStories.items)
+      setStories(storiesData.data.listStories.items)
+      console.log("Stories:", stories)
+      console.log("Active Story:", stories, activeStory)
+    }catch (error){
+      console.log("Error:", error)
+    }
+  }
   
   useEffect(() => {
-    if (!userStory){
+    if (!stories){
       return
     }
     if (activeStoryIndex < 0){
       setActiveStoryIndex(0)
     }
-    if (activeStoryIndex >= userStory.stories.length){
-      setActiveStoryIndex(userStory.stories.length - 1)
+    if (activeStoryIndex >= stories.length){
+      setActiveStoryIndex(stories.length - 1)
     }
-    setActiveStory(userStory.stories[activeStoryIndex])
-  }, [activeStoryIndex, userStory])
+    setActiveStory(stories[activeStoryIndex])
+    
+  }, [activeStoryIndex, stories])
+  
 
 
   const handlePreviousStory = () =>{

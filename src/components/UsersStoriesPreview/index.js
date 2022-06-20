@@ -3,7 +3,7 @@ import React, {useState, useEffect} from 'react'
 import UserStoryPreview from '../UserStoryPreview'
 import {API, graphqlOperation} from "aws-amplify"
 import { StyleSheet } from 'react-native'
-import stories from "../../data/stories"
+import storys from "../../data/stories"
 import {listStories} from "../../graphql/queries"
 
 const UsersStoriesPreview = () => {
@@ -15,8 +15,9 @@ const UsersStoriesPreview = () => {
 
   const fetchStories = async () =>{
     try{
-      const storiesData = await API.graphqlOperation(listStories())
-      setStories(storiesData.data.listStories.items)
+      const storiesData = await API.graphql(graphqlOperation(listStories()))
+      //setStories(storiesData.data.listStories.items)
+      console.log("StoriesData",storiesData)
       
     }catch (error){
       console.log("Error:", error)
@@ -25,7 +26,7 @@ const UsersStoriesPreview = () => {
   console.log(stories)
   return (
     <FlatList 
-      data={stories}
+      data={storys}
       style={styles.container}
       keyExtractor={({user:{id}}) => id}
       renderItem={({item}) => <UserStoryPreview story={item} />}
