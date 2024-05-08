@@ -1,9 +1,10 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {Button, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import {useStreamVideoClient} from '@stream-io/video-react-native-sdk';
 import {Pressable} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import { generateRandomString} from '../lib/generateRandomString';
+import { supabase } from '../lib/supabase';
 // import {client} from '../lib/stream';
 
 // const callId = 'default_7d46bbe7-2577-4a2b-b39f-fef833e8c177';
@@ -51,7 +52,7 @@ const Homescreen = () => {
         </Pressable>
       </View>
 
-      {/* <Button title="Sign out" onPress={() => supabase.auth.signOut()} /> */}
+      <Button title="Sign out" onPress={() => supabase.auth.signOut()} />
     </View>
   );
 };

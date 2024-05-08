@@ -12,6 +12,7 @@ import {StreamVideo} from '@stream-io/video-react-native-sdk';
 import {client} from './src/lib/stream';
 import RootStackNavigator from './src/navigation/RootStackNavigator';
 import {AuthProvider} from './src/providers/AuthProvider';
+import { StreamClientProvider } from './src/providers/StreamProvider';
 
 // continue from 2:21:51
 
@@ -29,11 +30,11 @@ const App = () => {
   }, []);
   return (
     <AuthProvider>
-      <StreamVideo client={client}>
+      <StreamClientProvider>
         <SafeAreaView style={styles.container}>
           <RootStackNavigator />
         </SafeAreaView>
-      </StreamVideo>
+      </StreamClientProvider>
     </AuthProvider>
   );
 };
