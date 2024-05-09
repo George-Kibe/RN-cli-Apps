@@ -38,12 +38,8 @@ const CallScreen = ({route}) => {
   // }, [call]);
 
   if (!call) {
-    return (
-      <View>
-        <ActivityIndicator />
-        <Text> Failed, try Again</Text>
-      </View>
-    );
+    // navigation.goBack();
+    return;
   }
 
   return (
@@ -51,7 +47,7 @@ const CallScreen = ({route}) => {
       <StreamCall call={call}>
         <RingingCallContent
           CallTopView={() => <CallTopView title={`ID: ${call.id}`} />}
-          onHangupCallHandler={() => navigation.navigate('Home')}
+          //onHangupCallHandler={() => navigation.navigate('Home')}
         />
       </StreamCall>
     </View>

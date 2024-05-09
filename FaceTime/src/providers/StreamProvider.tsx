@@ -2,20 +2,15 @@ import React, {useEffect} from 'react';
 import {
   StreamVideo,
   StreamVideoClient,
-  User,
 } from '@stream-io/video-react-native-sdk';
 import {PropsWithChildren} from 'react';
-import {useAuth} from './AuthProvider';
+import {useAuthProvider} from './AuthProvider';
 
 const apiKey = '67crtw84yr65';
-// const userId = 'GeorgeKibe';
-// const token = '';
-// const callId = 'GeorgeKibe';
-// const user: User = {id: userId};
 export const client = new StreamVideoClient({apiKey});
 
 export const StreamClientProvider = ({children}: PropsWithChildren) => {
-  const {session} = useAuth();
+  const {session} = useAuthProvider();
 
   useEffect(() => {
     if (!session?.user) {

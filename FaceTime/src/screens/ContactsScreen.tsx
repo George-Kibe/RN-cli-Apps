@@ -3,7 +3,7 @@
 import {Text, FlatList} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {supabase} from '../lib/supabase';
-import {useAuth} from '../providers/AuthProvider';
+import {useAuthProvider} from '../providers/AuthProvider';
 import {useStreamVideoClient} from '@stream-io/video-react-native-sdk';
 import {generateRandomString} from '../lib/generateRandomString';
 import {useNavigation} from '@react-navigation/native';
@@ -11,7 +11,7 @@ import {useNavigation} from '@react-navigation/native';
 const ContactsScreen = () => {
   const navigation = useNavigation();
   const [profiles, setProfiles] = useState([]);
-  const {session} = useAuth();
+  const {session} = useAuthProvider();
   const client = useStreamVideoClient();
 
   useEffect(() => {
