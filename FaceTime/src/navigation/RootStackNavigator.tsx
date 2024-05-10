@@ -12,23 +12,24 @@ const Stack = createStackNavigator();
 
 export default function RootStackNavigator() {
   const {session, loading} = useAuthProvider();
-  console.log(session);
+  console.log('session: ', session);
   if (loading) {
+    console.log('loading');
     return <ActivityIndicator />;
   }
-  if (!session) {
-    return (
-      <Stack.Navigator initialRouteName="auth">
-        <Stack.Screen name="Home" component={Homescreen} />
-        <Stack.Screen name="call" component={CallScreen} />
-        <Stack.Screen name="join" component={JoinCallScreen} />
-        <Stack.Screen name="auth" component={AUthScreen} />
-        <Stack.Screen name="contacts" component={ContactsScreen} />
-      </Stack.Navigator>
-    );
-  }
+  // if (!session) {
+  //   return (
+  //     <Stack.Navigator initialRouteName="auth">
+  //       <Stack.Screen name="Home" component={Homescreen} />
+  //       <Stack.Screen name="call" component={CallScreen} />
+  //       <Stack.Screen name="join" component={JoinCallScreen} />
+  //       <Stack.Screen name="auth" component={AUthScreen} />
+  //       <Stack.Screen name="contacts" component={ContactsScreen} />
+  //     </Stack.Navigator>
+  //   );
+  // }
   return (
-    <Stack.Navigator initialRouteName="Home">
+    <Stack.Navigator initialRouteName="auth">
       <Stack.Screen name="Home" component={Homescreen} />
       <Stack.Screen name="call" component={CallScreen} />
       <Stack.Screen name="join" component={JoinCallScreen} />

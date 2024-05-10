@@ -14,20 +14,18 @@ export default function ChatProvider({children}: PropsWithChildren) {
 
   useEffect(() => {
     // console.log("USE EFFECT: ", profile)
-    if (!profile) {
+    if (!user) {
       return;
     }
 
     const connect = async () => {
       await client.connectUser(
         {
-          id: profile.id,
-          name: profile.full_name,
-          image: supabase.storage
-            .from('avatars')
-            .getPublicUrl(profile.avatar_url).data.publicUrl,
+          id: user.id,
+          name: profile?.full_name || 'No Full Name',
+          image: 'https://i.ibb.co/MyddYHc/Watch.jpg',
         },
-        client.devToken(profile.id),
+        client.devToken(user.id),
       );
       setIsReady(true);
     };
@@ -39,11 +37,11 @@ export default function ChatProvider({children}: PropsWithChildren) {
 
       setIsReady(false);
     };
-  }, [profile?.id]);
+  }, [user?.id]);
 
-  if (!isReady) {
-    return <ActivityIndicator />;
-  }
+  // if (!isReady) {
+  //   return <ActivityIndicator />;
+  // }
 
   return (
     <OverlayProvider>

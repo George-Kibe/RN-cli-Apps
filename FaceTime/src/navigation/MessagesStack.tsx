@@ -9,6 +9,7 @@ import ContactsScreen from '../screens/ContactsScreen';
 import {ActivityIndicator} from 'react-native';
 
 import ChatScreen from '../screens/ChatsScreen';
+import SingleChatScreen from '../screens/SingleChatScreen';
 
 const Stack = createStackNavigator();
 
@@ -20,7 +21,8 @@ export default function ChatStackNavigator() {
   }
   return (
     <Stack.Navigator initialRouteName="Home">
-      <Stack.Screen name="Home" component={ChatScreen} />
+      <Stack.Screen name="Chats" component={ChatScreen} />
+      <Stack.Screen name="single-chat" component={SingleChatScreen} />
       <Stack.Screen name="call" component={CallScreen} />
       <Stack.Screen name="join" component={JoinCallScreen} />
       <Stack.Screen name="auth" component={AUthScreen} />

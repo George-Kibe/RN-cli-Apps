@@ -14,6 +14,7 @@ type AuthData = {
   loading: boolean;
   user: User | null;
   profile: any | null;
+  channel: any | null;
 };
 
 const AuthContext = createContext<AuthData>({
@@ -21,11 +22,13 @@ const AuthContext = createContext<AuthData>({
   loading: false,
   user: null,
   profile: null,
+  channel: null,
 });
 
 export function AuthProvider({children}: PropsWithChildren) {
   const [session, setSession] = useState<Session | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
+  const [channel, setChannel] = useState(null);
   const [profile, setProfile] = useState();
 
   useEffect(() => {
@@ -39,26 +42,23 @@ export function AuthProvider({children}: PropsWithChildren) {
     };
 
     fetchSession();
-
-    supabase.auth.onAuthStateChange((_event, session) => setSession(session));
-    const fetchProfile = async () => {
-      let {data, error} = await supabase
-        .from('profiles')
-        .select('*')
-        .eq('id', session.user.id)
-        .single();
-      setProfile(data);
-    };
-    fetchProfile();
   }, []);
+  // console.log("session:", session)
 
-  if (!session) {
-    return;
-  }
+  // if (!session) {
+  //   return;
+  // }
 
   return (
     <AuthContext.Provider
-      value={{session, loading, user: session?.user, profile}}>
+      value={{
+        session,
+        loading,
+        user: session?.user,
+        profile,
+        channel,
+        setChannel,
+      }}>
       {children}
     </AuthContext.Provider>
   );

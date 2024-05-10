@@ -13,6 +13,5 @@ export function CallsProvider({children}: PropsWithChildren) {
     }
   }, [calls]);
 
-  console.log('Calls provider');
   return children;
 }

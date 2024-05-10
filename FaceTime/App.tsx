@@ -5,6 +5,7 @@ import {
   Platform,
   SafeAreaView,
   StyleSheet,
+  View,
 } from 'react-native';
 import React, {useEffect} from 'react';
 import RootStackNavigator from './src/navigation/RootStackNavigator';
@@ -15,6 +16,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import ChatStackNavigator from './src/navigation/MessagesStack';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import ChatProvider from './src/providers/ChatProvider';
+import {Text} from 'react-native';
 
 const App = () => {
   useEffect(() => {
@@ -28,20 +30,21 @@ const App = () => {
     };
     run();
   }, []);
+
   return (
-    <GestureHandlerRootView style={{flex: 1}}>
+    <GestureHandlerRootView>
       <AuthProvider>
-        <StreamClientProvider>
-          <ChatProvider>
-            <NavigationContainer>
-              <CallsProvider>
+        <NavigationContainer>
+          <StreamClientProvider>
+            <CallsProvider>
+              <ChatProvider>
                 <SafeAreaView style={styles.container}>
                   <ChatStackNavigator />
                 </SafeAreaView>
-              </CallsProvider>
-            </NavigationContainer>
-          </ChatProvider>
-        </StreamClientProvider>
+              </ChatProvider>
+            </CallsProvider>
+          </StreamClientProvider>
+        </NavigationContainer>
       </AuthProvider>
     </GestureHandlerRootView>
   );
