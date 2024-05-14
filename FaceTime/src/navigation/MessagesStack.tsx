@@ -21,7 +21,7 @@ export default function ChatStackNavigator() {
   }
   return (
     <Stack.Navigator initialRouteName="Home">
-      <Stack.Screen name="Chats" component={ChatScreen} />
+      <Stack.Screen name="chats" component={ChatScreen} />
       <Stack.Screen name="single-chat" component={SingleChatScreen} />
       <Stack.Screen name="call" component={CallScreen} />
       <Stack.Screen name="join" component={JoinCallScreen} />

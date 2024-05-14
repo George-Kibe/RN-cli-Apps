@@ -1,18 +1,26 @@
-import {Button, StyleSheet, Text, View} from 'react-native';
+import {ActivityIndicator, Button, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import {useStreamVideoClient} from '@stream-io/video-react-native-sdk';
 import {Pressable} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
-import { generateRandomString} from '../lib/generateRandomString';
-import { supabase } from '../lib/supabase';
+import {generateRandomString} from '../lib/generateRandomString';
+import {supabase} from '../lib/supabase';
+import {useAuthProvider} from '../providers/AuthProvider';
 // import {client} from '../lib/stream';
 
-// const callId = 'default_7d46bbe7-2577-4a2b-b39f-fef833e8c177';
-
 const Homescreen = () => {
+  const {session, loading} = useAuthProvider();
   const navigation = useNavigation();
   const client = useStreamVideoClient();
   // const call = client?.call('default', callId);
+  if (loading) {
+    console.log('loading');
+    return <ActivityIndicator />;
+  }
+  if (!session) {
+    navigation.navigate('auth');
+    // return;
+  }
 
   const createCall = async () => {
     // create a call
@@ -53,6 +61,7 @@ const Homescreen = () => {
       </View>
 
       <Button title="Sign out" onPress={() => supabase.auth.signOut()} />
+      <Button title="Chats" onPress={() => navigation.navigate('chats')} />
     </View>
   );
 };
