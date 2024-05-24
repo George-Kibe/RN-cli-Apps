@@ -13,7 +13,6 @@ import {AuthProvider} from './src/providers/AuthProvider';
 import {StreamClientProvider} from './src/providers/StreamProvider';
 import {CallsProvider} from './src/providers/CallsProvider';
 import {NavigationContainer} from '@react-navigation/native';
-import ChatStackNavigator from './src/navigation/MessagesStack';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import ChatProvider from './src/providers/ChatProvider';
 

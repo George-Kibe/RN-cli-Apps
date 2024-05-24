@@ -1,4 +1,5 @@
 /* eslint-disable react/react-in-jsx-scope */
+import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 import Homescreen from '../screens/Homescreen';
 import CallScreen from '../screens/CallScreen';
