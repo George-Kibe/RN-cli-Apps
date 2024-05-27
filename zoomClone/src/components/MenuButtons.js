@@ -27,12 +27,17 @@ const items = [
   },
 ];
 
-const MenuButtons = () => {
+const MenuButtons = ({navigation}) => {
+  const openMeeting = () => {
+    navigation.navigate('Room');
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.buttonsContainer}>
         {items.map(item => (
           <TouchableOpacity
+            onPress={openMeeting}
             key={item.id}
             style={[
               styles.button,

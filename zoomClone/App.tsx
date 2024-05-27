@@ -3,6 +3,7 @@
  * https://github.com/facebook/react-native
  *
  * @format
+ * continue from 1:29:21
  */
 
 import React from 'react';

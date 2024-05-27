@@ -5,12 +5,12 @@ import SearchBar from '../components/SearchBar';
 import MenuButtons from '../components/MenuButtons';
 import Contacts from '../components/Contacts';
 
-const HomeScreen = () => {
+const HomeScreen = ({navigation}) => {
   return (
     <View style={styles.container}>
       <Header />
       <SearchBar />
-      <MenuButtons />
+      <MenuButtons navigation={navigation} />
       <Contacts />
     </View>
   );
