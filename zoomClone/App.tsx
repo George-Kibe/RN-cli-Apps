@@ -3,7 +3,8 @@
  * https://github.com/facebook/react-native
  *
  * @format
- * continue from 1:29:21
+ * continue from 3:45:00
+ * https://www.youtube.com/watch?v=dHTGKB6tIQI&t
  */
 
 import React from 'react';
