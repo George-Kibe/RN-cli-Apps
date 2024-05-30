@@ -1,6 +1,6 @@
 /* eslint-disable react/react-in-jsx-scope */
 import {View, Text, Image, StyleSheet} from 'react-native';
-// import {memo} from 'react';
+import {memo} from 'react';
 
 type Character = {
   id: number;
@@ -13,7 +13,7 @@ type CharacterListItem = {
 };
 
 const CharacterListItem = ({character}: CharacterListItem) => {
-  // console.log('Re-rendering: ', character.id);
+  console.log('Re-rendering: ', character.id);
   return (
     <View style={styles.container}>
       <Text style={styles.name}>{character.name}</Text>
@@ -42,9 +42,9 @@ const styles = StyleSheet.create({
   },
 });
 
-// export default memo(
-//   CharacterListItem,
-//   (prevProps, nextProps) => prevProps.character.id === nextProps.character.id,
-// );
+export default memo(
+  CharacterListItem,
+  (prevProps, nextProps) => prevProps.character.id === nextProps.character.id,
+);
 
-export default CharacterListItem;
+// export default CharacterListItem;
