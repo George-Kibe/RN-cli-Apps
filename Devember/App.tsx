@@ -6,12 +6,12 @@
  */
 
 import React from 'react';
-import {SafeAreaView, StyleSheet, useColorScheme} from 'react-native';
+import {StyleSheet, useColorScheme} from 'react-native';
 
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 import Homescreen from './src/screens/Homescreen';
-import {StatusBar} from 'react-native';
 import {View} from 'react-native';
+import RickAndMorty from './src/screens/RickAndMorty';
 
 function App(): React.JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
@@ -23,7 +23,8 @@ function App(): React.JSX.Element {
   return (
     <View style={[backgroundStyle, styles.container]}>
       {/* <StatusBar barStyle={'default'} /> */}
-      <Homescreen />
+      {/* <Homescreen /> */}
+      <RickAndMorty />
     </View>
   );
 }
