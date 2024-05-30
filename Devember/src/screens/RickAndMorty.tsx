@@ -9,20 +9,19 @@ import {View} from 'react-native';
 // import characters from '../data/character.json';
 
 const RickAndMorty = () => {
+  const initialPage = 'https://rickandmortyapi.com/api/character';
   const [loading, setLoading] = useState<Boolean>(false);
   const [items, setItems] = useState([]);
-  const [nextPage, setNextPage] = useState(
-    'https://rickandmortyapi.com/api/character',
-  );
+  const [nextPage, setNextPage] = useState('');
 
-  const fetchNextItems = async () => {
+  const fetchNextItems = async (url: string) => {
     if (loading) {
       return;
     }
-    console.log('fetching items from: ', nextPage);
+    console.log('fetching items from: ', url);
     setLoading(true);
     try {
-      const response = await fetch(nextPage);
+      const response = await fetch(url);
       const jsonResponse = await response.json();
       // console.log(JSON.stringify(jsonResponse, null, 2));
       setItems(exisitingItems => {
@@ -37,8 +36,14 @@ const RickAndMorty = () => {
   };
 
   useEffect(() => {
-    fetchNextItems();
+    fetchNextItems(initialPage);
   }, []);
+
+  const handleRefresh = () => {
+    setItems([]);
+    setNextPage(initialPage);
+    fetchNextItems(initialPage);
+  };
 
   // if (loading) {
   //   return <ActivityIndicator size={'large'} />;
@@ -49,17 +54,21 @@ const RickAndMorty = () => {
         data={items}
         renderItem={({item}) => <CharacterListItem character={item} />}
         contentContainerStyle={{gap: 10}}
+        refreshing={loading}
+        onRefresh={handleRefresh}
         ListFooterComponent={() => (
           <View>
             {loading && <ActivityIndicator size={'large'} />}
-            <Text onPress={fetchNextItems} style={styles.loadMore}>
+            <Text
+              onPress={() => fetchNextItems(nextPage)}
+              style={styles.loadMore}>
               Load More...
             </Text>
           </View>
         )}
-        onEndReached={fetchNextItems} // Load items when end of list is reached
+        onEndReached={() => fetchNextItems(nextPage)} // Load items when end of list is reached
         onEndReachedThreshold={5}
-        debug={true}
+        // debug={true}
       />
     </SafeAreaView>
   );
