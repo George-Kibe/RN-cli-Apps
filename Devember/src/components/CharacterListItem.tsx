@@ -2,7 +2,7 @@
 import {View, Text, Image, StyleSheet} from 'react-native';
 import {memo} from 'react';
 
-type Character = {
+export type Character = {
   id: number;
   name: string;
   image?: string;

@@ -1,19 +1,28 @@
 /* eslint-disable react/no-unstable-nested-components */
 /* eslint-disable react-native/no-inline-styles */
-import {StyleSheet, SafeAreaView, FlatList} from 'react-native';
+import {
+  StyleSheet,
+  SafeAreaView,
+  FlatList,
+  // useWindowDimensions,
+} from 'react-native';
 import React, {useCallback, useEffect, useRef, useState} from 'react';
-import CharacterListItem from '../components/CharacterListItem';
+import CharacterListItem, {Character} from '../components/CharacterListItem';
 import {ActivityIndicator} from 'react-native';
-import {Text} from 'react-native';
-import {View} from 'react-native';
+import {Text, View, ViewToken} from 'react-native';
 // import characters from '../data/character.json';
+
+type CharacterListType = {
+  character: Character;
+};
 
 const RickAndMorty = () => {
   const initialPage = 'https://rickandmortyapi.com/api/character';
   const [loading, setLoading] = useState<Boolean>(false);
-  const [items, setItems] = useState([]);
+  const [items, setItems] = useState<CharacterListType[]>([]);
   const [nextPage, setNextPage] = useState('');
   const [currentPostId, setCurrentPostId] = useState('1');
+  // const {width} = useWindowDimensions();
 
   const fetchNextItems = async (url: string) => {
     if (loading) {
@@ -36,18 +45,31 @@ const RickAndMorty = () => {
     }
   };
 
+  // Use case: increase impression count for posts
+  // that are visible on the screen for more than 0.5 seconds
   const viewabilityConfigCallbackPairs = useRef([
     {
       viewabilityConfig: {
-        itemVisiblePercentThreshold: 50,
-        // minimumViewTime: 100,
+        itemVisiblePercentThreshold: 50, // better to use whn items does not occupy 100% height
+        minimumViewTime: 500, // in millisends half a second
       },
-      onViewableItemsChanged: ({changed, viewableItems}) => {
+      onViewableItemsChanged: ({
+        changed,
+        viewableItems,
+      }: {
+        changed: Array<ViewToken>;
+        viewableItems: Array<ViewToken>;
+      }) => {
         // console.log('Changed: ', changed);
         // console.log('Viewable Items: ', viewableItems);
         if (viewableItems.length > 0 && viewableItems[0].isViewable) {
           setCurrentPostId(viewableItems[0].item.id);
         }
+        changed.forEach(changedItem => {
+          if (changedItem.isViewable) {
+            console.log('++ Impression for: ', changedItem.item.id);
+          }
+        });
       },
     },
   ]);
@@ -71,6 +93,7 @@ const RickAndMorty = () => {
     // to ensure debug works even before the API is called
     return <ActivityIndicator size={'large'} />;
   }
+  // const itemHeight = width + 40;
 
   return (
     <SafeAreaView style={styles.container}>
@@ -100,6 +123,12 @@ const RickAndMorty = () => {
         viewabilityConfigCallbackPairs={viewabilityConfigCallbackPairs.current}
         showsVerticalScrollIndicator={false}
         pagingEnabled
+        // getItemLayout={(data, index) => ({
+        //   length: itemHeight,
+        //   offset: (itemHeight + 5) * index,
+        //   index,
+        // })}
+        numColumns={4}
       />
     </SafeAreaView>
   );
